@@ -1,0 +1,158 @@
+{include file="public/top"}
+
+
+<!-- //banner -->
+<!-- single -->
+<div class="single">
+	<div class="container">
+		<div class="col-md-6 single-right-left animated wow slideInUp animated" data-wow-delay=".5s">
+			<div class="grid images_3_of_2">
+				<div class="flexslider">
+				<!-- FlexSlider -->
+					<script>
+					// Can also be used with $(document).ready()
+						$(window).load(function() {
+							$('.flexslider').flexslider({
+							animation: "slide",
+							slideToStart:0,
+							controlNav: "thumbnails",
+							itemWidth : 403,
+							});
+						});
+					</script>
+				<!-- //FlexSlider-->
+				<ul class="slides">
+					{volist name="product['mimg_url']" id="vo"}
+					<li data-thumb="{$vo}">
+						<div class="thumb-image"> <img src="{$vo}" data-imagezoom="true" class="img-responsive"> </div>
+					</li>
+					{/volist}
+				</ul>
+				<div class="clearfix"></div>
+			</div>	
+			</div>
+		</div>
+		<div class="col-md-6 single-right-left simpleCart_shelfItem animated wow slideInRight animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: slideInRight;">
+					<h3>{$product.title}</h3>
+					<p><span class="item_price"><span>现价</span>{$product.price}</span> <del><span>原价￥</span>{$product.originalCost}</del></p>
+					
+					<div class="description">
+						<h5>{$product.description}</h5>
+						
+                        
+                        <p>库存：{$product.stocks}</p>
+                        <p>销量：{$product.salecount}</p>
+					</div>
+					
+				
+					<div class="occasion-cart">
+						<form id="addtocart" action="{:url('Carts/add')}" callback="nonex">
+							<input type="hidden" name="product_num" id="num" value="1"/>
+							<input type="hidden" name="product_id" value="{$product.id}">
+							 <div class="quantity"> 
+								<div class="quantity-select">                           
+									<div class="entry value-minus">&nbsp;</div>
+									<div class="entry value"><span>1</span></div>
+									<div class="entry value-plus active">&nbsp;</div>
+								</div>
+							</div>
+						<!--quantity-->
+					<script>
+					$('.value-plus').on('click', function(){
+						var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)+1;
+						divUpd.text(newVal);
+						$('#num').val(newVal);
+					});
+
+					$('.value-minus').on('click', function(){
+						var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)-1;
+						if(newVal>=1) divUpd.text(newVal);
+						$('#num').val(newVal);
+					});
+					</script>
+				<!--quantity-->
+                
+                
+                <p>&nbsp;</p>
+						<a onClick="$('#addtocart').submit();" class="item_add hvr-outline-out button2">添加到购物车</a>
+							
+						</form>
+					</div>
+					
+		</div>
+				<div class="clearfix"> </div>
+
+				<div class="bootstrap-tab animated wow slideInUp animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: slideInUp;">
+					<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+						<ul id="myTab" class="nav nav-tabs" role="tablist">
+							<li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">商品详情</a></li>
+							<li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">评论</a></li>
+		
+						</ul>
+						<div id="myTabContent" class="tab-content">
+							<div role="tabpanel" class="tab-pane fade in active bootstrap-tab-text" id="home" aria-labelledby="home-tab">
+								{$product.content}
+							</div>
+							<div role="tabpanel" class="tab-pane fade bootstrap-tab-text" id="profile" aria-labelledby="profile-tab">
+								<div class="bootstrap-tab-text-grids">
+                                
+                                
+                                
+                                
+                                {volist name="list" id="vo"}
+									<div class="bootstrap-tab-text-grid">
+										<div class="bootstrap-tab-text-grid-left">
+											<img src="{$vo.photo}" alt=" " class="img-responsive">
+										</div>
+										<div class="bootstrap-tab-text-grid-right">
+											<ul>
+												<li><a href="##">{$vo.nickname}</a></li>
+												
+											</ul>
+											<p>{$vo.comment}</p>
+										</div>
+										<div class="clearfix"> </div>
+									</div>
+                                  {/volist}  
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+									
+									<div class="add-review">
+										<h4 style="margin-bottom:5px;">我要评论</h4>
+										<form method="post" class="commentform" callback="j" action="{:url('commentinsert')}">
+											<input type="hidden" name="product_id" value="{$product.id}">
+                                            <input type="hidden" name="product_name" value="{$product.title}">
+                                            <input type="hidden" name="product_img" value="{$product.img_url}">
+											<textarea type="text" name="comment" placeholder="内容..."></textarea>
+											<input type="submit" value="提交">
+										</form>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+	</div>
+</div>
+
+{include file="public/bottom"}
+
+<script>
+    $('.commentform').ajaxsubmit({error:function(ret){
+		if(ret.code == 0){
+			$('#myModal4').modal('show');
+		}
+	}});
+	
+	$('#addtocart').ajaxsubmit({error:function(ret){
+		if(ret.code == 0){
+			$('#myModal4').modal('show');
+		}
+	}});
+
+</script>

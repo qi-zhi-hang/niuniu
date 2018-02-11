@@ -1,0 +1,179 @@
+
+<!-- footer -->
+<div class="footer">
+	<div class="container">
+		<div class="col-md-4 footer-left">
+			<h2><a href="index.html"><img src="{:getconfig('logo')}" alt=" " /></a></h2>
+			<p>{:getconfig('siteinfo')}漂亮裙子优惠专场，实时更新高性价比漂亮裙子单品、漂亮裙子打折特卖信息，全场低至1折起包邮，敬请关注！这些漂亮裙子都是由专业编辑为您精挑细选的，时下最好、最流行的，帮您节省浏览海量商品信息时间，让您以更优惠的折扣价格购买到自己喜欢的漂亮裙子！</p>
+		</div>
+		<div class="col-md-8 footer-right">
+			
+			<div class="clearfix"></div>
+			<div class="sign-grds">
+				
+				<div class="col-md-7 sign-gd-two">
+					<h4>店铺信息</h4>
+					<ul>
+						<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>地址: {:getconfig('address')}</li>
+						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i>邮箱 : <a href="mailto:{:getconfig('email')}">{:getconfig('email')}</a></li>
+						<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>电话:{:getconfig('tel')}</li>
+					</ul>
+				</div>
+				<div class="col-md-5 sign-gd flickr-post">
+					<h4>扫描二维码有惊喜哦！</h4>
+					<img src="__STATIC__/images/21925ad81c3e406deff8070f3be7e30f.png" width="200" height="200" alt=""/>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		
+	</div>
+</div>
+<!-- //footer -->
+
+<!-- login -->
+<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal-dialog" role="document">
+<div class="modal-content modal-info">
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
+</div>
+<div class="modal-body modal-spa">
+	<div class="login-grids">
+		<div class="login">
+			<div class="login-bottom">
+				<h3>注册
+				<span id="errormsg" style="font-size:12px; color:#f00;">
+					
+				</span><span id="successmsg" style="font-size:12px; color:green;">
+					
+				</span>
+				</h3>
+				<form action="{:url('Member/Login/doregister')}" id="register"  callback="none">
+					<div class="sign-up">
+						<h4>邮箱</h4>
+						<input type="text" value="" placeholder="请输入账号" id="email" name="email">	
+					</div>
+					<div class="sign-up">
+						<h4>昵称</h4>
+						<input type="text" placeholder="请输入昵称" name="nickname">
+						
+					</div>
+					<div class="sign-up">
+						<h4>密码</h4>
+						<input type="password" id="password" name="password">
+						
+					</div>
+					<div class="sign-up">
+						<h4>确认密码</h4>
+						<input type="password" name="repassword">
+						
+					</div>
+					<div class="sign-up">
+						<input type="submit" value="立即注册">
+					</div>
+					
+				</form>
+			</div>
+			<div class="login-right">
+				<h3>登录<span id="errormsg" style="font-size:12px; color:#f00;">
+					
+				</span><span id="successmsg" style="font-size:12px; color:green;">
+					
+				</span></h3>
+				<form action="{:url('Member/Login/doLogin')}" method="post" callback="none">
+					<div class="sign-in">
+						<h4>邮箱</h4>
+						<input type="text" name="Email" value="{$Think.cookie.Email ?? ''}">	
+					</div>
+					<div class="sign-in">
+						<h4>密码</h4>
+						<input type="password" value="{$Think.cookie.password ?? ''}" name="password">
+						<a href="#">忘记密码</a>
+					</div>
+					<div class="single-bottom">
+						
+						<input type="checkbox"  id="brand" name="remember" value="on" {if condition="isset($_COOKIE['remember'])"}checked{/if}>
+						<label for="brand"><span></span>记住密码</label>
+					</div>
+					<div class="sign-in">
+						<input type="submit" value="立即登录" >
+					</div>
+				</form>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+</div>
+<!-- //login -->
+<script>
+	$('#register').submit(function(e) 
+	{
+    var data = $(this).serialize();
+	$.ajax({
+		url:$(this).attr('action'),
+		type:'POST',
+		dataType:"json",
+		data:data,
+		success: function(ret){
+			 if(ret.code == 0){
+			 	$('#errormsg').html(ret.msg);
+			 }else{
+			 		$('#successmsg').html(ret.msg);
+			 		setTimeout(function(){
+			 			window.location.reload();
+			 		},500);
+			 		
+				}
+		}
+	});
+	return false;
+});
+
+	$('#login').submit(function(e){
+		var data = $(this).serialize();
+		//return false;
+		$.ajax({
+			url:$(this).attr('action'),
+			type:'POST',
+			dataType:"json",
+			data:data,
+			success: function(ret){
+				 if(ret.code == 0){
+					$('#errormsg').html(ret.msg);
+				 }else{
+						$('#successmsg').html(ret.msg);
+						setTimeout(function(){
+							window.location.reload();
+						},500);
+						
+					}
+			}
+		});
+		return false;
+	});
+	
+//购物车数量
+$.get("{:url('Carts/getCart')}", {}, function(data){
+	$('#simpleCart_quantity').html(data.num);
+}, 'json');
+
+
+
+</script>
+<script src="__STATIC__/js/setajax.js"></script>
+<script src="__STATIC__/index/js/jquery.flexslider.js"></script>
+<script src="__STATIC__/index/js/imagezoom.js"></script><script>
+    $('.addcartform').ajaxsubmit({error:function(ret){
+		if(ret.code == 0){
+			$('#myModal4').modal('show');
+		}
+}});
+$('form[callback="jump"]').ajaxsubmit();
+</script>
+</body>
+</html>

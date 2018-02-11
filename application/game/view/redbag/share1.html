@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
+    <meta name="description" content="不超过150个字符"/>
+    <meta name="keywords" content="">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="robots" content="index,follow"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>红包</title>
+</head>
+<body>
+{:dump($member)}
+<form id="formopen" action="{:url('open')}" method="post">
+    <input type="hidden" name="id" value="{$member.id}">
+    <button type="submit">点击打开红包</button>
+</form>
+<script src="__STATIC__/game/js/jquery-1.12.1.js"></script>
+<script src="__STATIC__/js/setajax.js"></script>
+<script>
+    $('#formopen').ajaxsubmit({success:function(ret){
+        //领取成功回调方法，如果要做成功后的动作，可以在这里写
+    }});
+</script>
+</body>
+</html>

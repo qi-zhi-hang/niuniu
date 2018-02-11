@@ -1,0 +1,40 @@
+{include file="public/top"}
+       <!--body wrapper start-->
+        <div class="wrapper">
+          <div class="panel">
+          
+          <header class="panel-heading">
+              文章分类管理
+          <span class="pull-right"> <a href="{:url('add')}" class="btn btn-success btn-sm">增加分类</a> </span>
+         </header>
+            <div class="panel-body"><table class="table table-hover table-bordered">
+  <tbody>
+    <thead>
+      <th>ID</th>
+      <th>分类</th>
+      
+      <th>描述</th>
+      <th>操作</th>
+    </thead>
+    {volist name="list" id="vo"}
+    <tr>
+      <td>{$vo.id}</td>
+      <td>{$vo.classname}</td>
+     
+      <td>{$vo.description}</td>
+      <td>
+        <a href="{:url('delete', array('id' => $vo['id']))}" class="btn btn-danger btn-sm">删除</a>  
+        <a href="{:url('modify', array('id' => $vo['id']))}" class="btn btn-success btn-sm">修改</a>
+        <a href="{:url('Article/index', array('cid' => $vo['id']))}" class="btn btn-success btn-sm">查看</a>
+      </td>
+    </tr>
+    {/volist}
+    <tr>
+      <td colspan="4" align="center">{$pages}</td>
+    </tr>
+  </tbody>
+</table></div>
+  </div>
+</div>
+        <!--body wrapper end-->
+{include file="public/bottom"}

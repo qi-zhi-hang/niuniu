@@ -1,0 +1,12 @@
+!bin
+!composer
+!doctrine
+!phpdocumentor
+!phpspec
+!phpunit
+!sebastian
+!symfony
+!topthink
+!webmozart
+!workerman
+!autoload.php

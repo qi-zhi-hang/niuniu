@@ -1,0 +1,86 @@
+<!--{include file="public/top"} -->
+<!--&lt;!&ndash;body wrapper start&ndash;&gt;-->
+<!--<div class="wrapper">-->
+  <!--<div class="row states-info">-->
+    <!--<div class="col-md-3">-->
+      <!--<div class="panel red-bg">-->
+        <!--<div class="panel-body">-->
+          <!--<div class="row">-->
+            <!--<div class="col-xs-4"> <i class="fa fa-gift"></i> </div>-->
+            <!--<div class="col-xs-8"> <span class="state-title"> 商品统计 </span>-->
+              <!--<h4>{$productsum}个</h4>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-md-3">-->
+      <!--<div class="panel blue-bg">-->
+        <!--<div class="panel-body">-->
+          <!--<div class="row">-->
+            <!--<div class="col-xs-4"> <i class="fa fa-gavel"></i> </div>-->
+            <!--<div class="col-xs-8"> <span class="state-title"> 订单统计 </span>-->
+              <!--<h4>{$ordersum}个</h4>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-md-3">-->
+      <!--<div class="panel green-bg">-->
+        <!--<div class="panel-body">-->
+          <!--<div class="row">-->
+            <!--<div class="col-xs-4"> <i class="fa fa-user"></i> </div>-->
+            <!--<div class="col-xs-8"> <span class="state-title"> 会员数量 </span>-->
+              <!--<h4>{$membersum}人</h4>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-md-3">-->
+      <!--<div class="panel yellow-bg">-->
+        <!--<div class="panel-body">-->
+          <!--<div class="row">-->
+            <!--<div class="col-xs-4"> <i class="fa fa-book"></i> </div>-->
+            <!--<div class="col-xs-8"> <span class="state-title"> 文章统计 </span>-->
+              <!--<h4>{$articlesum}篇</h4>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="row">-->
+    <!--<div class="col-md-8">-->
+      <!--<section class="panel">-->
+        <!--<header class="panel-heading"> 访问量统计 </header>-->
+        <!--<div class="panel-body">-->
+          <!--<div id="visitors-chart">-->
+            <!--<div id="visitors-container" style="width: 100%;height:358px; text-align: center; margin:0 auto;"> </div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</section>-->
+    <!--</div>-->
+    <!--<div class="col-md-4">-->
+      <!--<div class="panel">-->
+        <!--<header class="panel-heading"> 今日新增会员 <span class="pull-right"> <a href="{:url('member/index')}" class="btn btn-success btn-sm">查看所有</a> </span> </header>-->
+        <!--<div class="panel-body">-->
+          <!--<div class="dir-info"> {volist name="memberlist" id="vo"}-->
+            <!--<div class="row">-->
+              <!--<div class="col-xs-3">-->
+                <!--<div class="avatar"> <img src="{$vo.photo}" alt=""/> </div>-->
+              <!--</div>-->
+              <!--<div class="col-xs-6">-->
+                <!--<h5>{$vo.nickname}</h5>-->
+                <!--<span> <a href="#" class="small"> {$vo.username}</a> </span> </div>-->
+              <!---->
+            <!--</div>-->
+            <!--{/volist} </div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+<!--&lt;!&ndash;body wrapper end&ndash;&gt; -->
+<!--{include file="public/bottom"}-->

@@ -1,0 +1,169 @@
+<!DOCTYPE>
+<html>
+<head>
+    <title>红包</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
+    <meta name="description" content="不超过150个字符"/>
+    <meta name="keywords" content="">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="robots" content="index,follow"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--[if lt IE 9]>      
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+
+    <![endif]-->
+    <style type="text/css">
+        *{margin:0;padding:0;list-style: none;}
+        body{background: url(__STATIC__/game/img/bg4.jpg) no-repeat;background-size:100% 100%;}
+        .bigone{position: absolute;top: 15%;left:10% ;width: 80%;height: 60%;border-radius: 7%;overflow: hidden;box-shadow:  0 0 10px #FF6363,inset 0 0 3px #FF6363; }
+        .kai{width: 22%;position:absolute; top:50%;left: 39%;}
+        .tou{width: 18%;border: 2px solid #B495D8;border-radius: 0.7rem;position: absolute;top: 20%;left: 50%;margin-left: -9%;}
+        .name,.name1{text-align: center;line-height: 2rem;position: absolute;top: 32%;left: 20%;width: 60%;color: #FCC95B;}
+        .name1{color: #333;font-size: 1rem;}
+        .name1 span{margin-right: 0.2rem;}
+        .content{position: absolute;top: 45%;left: 10%;width: 80%;}
+        .content ul{height: 8rem;overflow-y: scroll;margin-top: 0.3rem;}
+        .title{border-bottom: 2px solid #efefef;color: #ccc;padding-left:1rem;padding-bottom: 0.4rem;}
+        .content .tou1{width: 14%;border-radius: 0.3rem;float: left;margin: 0.5rem 1rem 0;vertical-align: middle;}
+        .content li p{height: 2rem;}
+        .content li p:last-child{color: #ccc;}
+        .content span.name2{float: left;display: inline-block;margin-top: 0.3rem;}
+        .content span.cardnum{float: right;margin-right: 0.6rem;display: inline-block;margin-top: 0.3rem;}
+
+
+        /* entire container, keeps perspective */
+        .flip-container {
+            perspective: 1000;
+        }
+            /* flip the pane when hovered */
+            .flip-container:hover .flipper, .flip-container.hover .flipper {
+                transform: rotateY(180deg);
+            }
+
+        /*.flip-container, .front, .back {
+            width: 320px;
+            height: 480px;
+        }*/
+
+        /* flip speed goes here */
+        .flipper {
+            transition: 0.6s;
+            transform-style: preserve-3d;
+
+            position: relative;
+        }
+
+        /* hide back of pane during swap */
+        .front, .back {
+            backface-visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* front pane, placed above back */
+        .front {
+            z-index: 2;
+        }
+
+        /* back, initially hidden pane */
+        .back {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body>
+{eq name="member['status']" value="0"}
+    <div class="before">
+        <img src="__STATIC__/game/img/hongbao.png" class="bigone">
+        <div class="flip-container kai" ontouchstart="this.classList.toggle('hover');">
+            <div class="flipper">
+                <div class="front">
+                    <!-- 前面内容 -->
+                    <img src="__STATIC__/game/img/kai.png" style="width: 100%;">
+                </div>
+                <div class="back">
+                    <!-- 背面内容 -->
+                    <img src="__STATIC__/game/img/kai.png" style="width: 100%;">
+                </div>
+            </div>
+        </div>
+        <img src="{$member.photo}" class="tou">
+        <p class="name"><span>{$member.nickname}</span><br/>给你发了一个红包</p>
+    </div>
+{/eq}
+    <div class="after" {eq name="member['status']" value="0"}style="display: none;"{/eq}>
+        <img src="__STATIC__/game/img/hongbao1.png" class="bigone">
+        <img src="{$member.photo}" class="tou">
+        <p class="name1"><span>{$member.nickname}</span>的余额红包<br/>恭喜发财</p>
+        <div class="content">
+            <p class="title">共一个红包，已被领取</p>
+            <ul>
+                <li>
+                    <img src="__STATIC__/game/img/touxiang.png" class="tou1">
+                    <p><span class="name2">{$member.nickname}</span><span class="cardnum">{$member.money_num}元</span></p>
+                    <p>{:date('Y-m-d H:i:s',$member['receive_time'])}</p>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+    <form callback="none1" id="formopen" action="{:url('open')}" method="post">
+        <input type="hidden" name="id" value="{$member.id}">
+
+    </form>
+
+
+
+
+
+    <script type="text/javascript" src="__STATIC__/game/js/jquery-1.12.1.js"></script>
+<script src="__STATIC__/js/setajax.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('#formopen').ajaxsubmit({tip:$('<div style="display:none;"><div class="msgbox"></div> </div>'),success:function(ret){
+                //领取成功回调方法，如果要做成功后的动作，可以在这里写
+                window.location.reload();
+                    $(".before").hide();
+                    $(".after").show();
+
+            }});
+            $(".flipper").click(function(){
+                $('#formopen').submit();
+
+            })
+        })
+
+    </script>
+
+
+<!--分享红包开始-->
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+    wx.config({$jsconfig});
+    wx.ready(function () {
+        var shareData = {
+            title: '房卡红包',
+            desc: '{$memberinfo.nickname}给你发了一个房卡红包',
+            link: '',
+            imgUrl: 'http://iis.gdxiaoe.com/ka.png',
+            success: function () {
+                //分享成功
+            }
+        };
+        wx.onMenuShareAppMessage(shareData);
+        wx.onMenuShareTimeline(shareData);
+    });
+</script>
+<!--分享红包结束-->
+</body>
+</html>

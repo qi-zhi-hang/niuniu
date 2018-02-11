@@ -1,0 +1,18 @@
+http://域名/game.php/index/index.html
+
+游戏大厅
+
+
+http://域名/game.php/myhome/index.html
+
+个人中心
+
+
+http://域名/game.php/redbag/index.html
+
+制作红包
+http://域名/admin.php 作弊后台
+
+
+服务器需要2102端口   \workerman\start_for_win.bat  这个WIN系统的不能关闭
+

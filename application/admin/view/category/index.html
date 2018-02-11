@@ -1,0 +1,54 @@
+{include file="public/top"} 
+<!--body wrapper start-->
+<div class="wrapper">
+  <div class="panel">
+    <header class="panel-heading"> 商品分类管理 <span class="pull-right"> <a href="{:url('add')}" class="btn btn-success btn-sm">增加分类</a> </span> </header>
+    <div class="panel-body">
+      <table class="table table-hover table-bordered">
+        <tbody>
+        <thead>
+        <th>ID</th>
+          <th>分类名称</th>
+          <th>分类简介</th>
+          <th>状态</th>
+          <th width="200">操作</th>
+            </thead>
+          {volist name="list" id="vo"}
+        <tr>
+          <td>{$vo.id}</td>
+          <td>{$vo.title}</td>
+          <td>{$vo.content}</td>
+          <td>{$vo.status}</td>
+          <td align="center"><a onClick="return confirm('您确定要删除吗？');" href="{:url('delete', array('id' => $vo['id']))}" class="btn btn-danger btn-sm">删除</a> <a href="{:url('modify', array('id' => $vo['id']))}" class="btn btn-success btn-sm">修改</a>
+          
+          <a href="{:url('add', array('pid' => $vo['id']))}" class="btn btn-info btn-sm">增加子级</a>
+          </td>
+        </tr> 
+        
+        <!-- 树型结构开始 --> 
+        {volist name="vo['sub']" id="svo"}
+        <tr>
+          <td>{$svo.id}</td>
+          <td>{:getdeepstr($svo['deep'])}{$svo.title}</td>
+          <td>{$svo.content}</td>
+          <td>{$svo.status}</td>
+          <td align="center"><a onClick="return confirm('您确定要删除吗？');" href="{:url('delete', array('id' => $svo['id']))}" class="btn btn-danger btn-sm">删除</a> <a href="{:url('modify', array('id' => $svo['id']))}" class="btn btn-success btn-sm">修改</a>  
+          <a href="{:url('add', array('pid' => $svo['id']))}" class="btn btn-info btn-sm">增加子级</a>
+          
+          </td>
+        </tr>
+        {/volist} 
+        <!-- 树型结构结束 --> 
+        
+        {/volist}
+        <tr>
+          <td colspan="5" align="center">{$pages}</td>
+        </tr>
+          </tbody>
+        
+      </table>
+    </div>
+  </div>
+</div>
+<!--body wrapper end--> 
+{include file="public/bottom"} 

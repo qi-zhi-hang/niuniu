@@ -1,0 +1,48 @@
+{include file="public/top"}
+       <!--body wrapper start-->
+        <div class="wrapper">
+          <div class="panel">
+          
+          <header class="panel-heading">
+              会员管理
+             <span class="pull-right">
+             <!--<a href="{:url('add')}" class="btn btn-success btn-sm"><i class="fa fa-plus" ></i> 增加会员</a>-->
+             </span>
+
+         </header>
+            <div class="panel-body">
+
+              <table class="table table-hover table-bordered">
+                <tbody>
+                 <thead>
+                   <th>ID</th>
+                  <th width="220">昵称</th>
+                  <th width="120">房卡数</th>
+                  <th>金币</th>
+                  <th>状态</th>
+                   <th>得胜率</th>
+                  <th style="text-align:center">操作</th>
+                </thead>
+                {volist name="list" id="vo"} 
+                <tr>
+                  <td>{$vo.id}</td>
+                  <td>{$vo.nickname}</td>
+                  <td>{$vo.cards}</td>
+                  <td>{$vo.money}</td>
+                  <td>{$vo.status}</td>
+                    <td>{$vo.rate}%</td>
+                  <td style="text-align:center; width:120px;"><a href="{:url('delete', array('id' => $vo['id']))}" class="btn btn-danger btn-sm">删除</a> <a href="{:url('modify', array('id' => $vo['id']))}" class="btn btn-success btn-sm">修改</a></td>
+                </tr>
+               {/volist}
+              <tr>
+                <td colspan="9" align="center">{$pages}</td>
+              </tr>
+          </tbody>
+
+      </table>
+    </div>
+  </div>
+</div>
+        <!--body wrapper end-->
+{include file="public/bottom"}
+

@@ -1,0 +1,383 @@
+.dropzonebox,
+.dropzonebox *,
+.dropzonebox-previews,
+.dropzonebox-previews * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dropzonebox {
+  position: relative;
+  display:block;
+}
+.dropzonebox.clickable {
+  cursor: pointer;
+}
+.dropzonebox.clickable .message {
+  cursor: pointer;
+}
+.dropzonebox.clickable * {
+  cursor: default;
+}
+.dropzonebox .message {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+}
+.dropzonebox.drag-hover {
+  border-color: rgba(0,0,0,0.15);
+  background: rgba(0,0,0,0.04);
+}
+.dropzonebox.started .message {
+  display: none;
+}
+.dropzonebox .preview,
+.dropzonebox-previews .preview {
+  background: rgba(255,255,255,0.8);
+  position: relative;
+  display: inline-block;
+  margin: 17px;
+  vertical-align: top;
+  border: 1px solid #acacac;
+  padding: 6px 6px 6px 6px;
+}
+.dropzonebox .preview .details,
+.dropzonebox-previews .preview .details {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  background: #ebebeb;
+  padding: 5px;
+}
+.dropzonebox .preview .details .filename,
+.dropzonebox-previews .preview .details .filename {
+  overflow: hidden;
+  height: 100%;
+}
+.dropzonebox .preview .details img,
+.dropzonebox-previews .preview .details img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+}
+.dropzonebox .preview .details .size,
+.dropzonebox-previews .preview .details .size {
+  position: absolute;
+  bottom: -28px;
+  left: 3px;
+  height: 28px;
+  line-height: 28px;
+}
+.dropzonebox .preview.error .error-mark,
+.dropzonebox-previews .preview.error .error-mark {
+  display: block;
+}
+.dropzonebox .preview.success .success-mark,
+.dropzonebox-previews .preview.success .success-mark {
+  display: block;
+}
+.dropzonebox .preview:hover .details img,
+.dropzonebox-previews .preview:hover .details img {
+  display: none;
+}
+.dropzonebox .preview:hover .success-mark,
+.dropzonebox-previews .preview:hover .success-mark,
+.dropzonebox .preview:hover .error-mark,
+.dropzonebox-previews .preview:hover .error-mark {
+  display: none;
+}
+.dropzonebox .preview .success-mark,
+.dropzonebox-previews .preview .success-mark,
+.dropzonebox .preview .error-mark,
+.dropzonebox-previews .preview .error-mark {
+  display: none;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  font-size: 30px;
+  text-align: center;
+  right: -10px;
+  top: -10px;
+}
+.dropzonebox .preview .success-mark,
+.dropzonebox-previews .preview .success-mark {
+  color: #8cc657;
+}
+.dropzonebox .preview .error-mark,
+.dropzonebox-previews .preview .error-mark {
+  color: #ee162d;
+}
+.dropzonebox .preview .progress,
+.dropzonebox-previews .preview .progress {
+  position: absolute;
+  top: 100px;
+  left: 6px;
+  right: 6px;
+  height: 6px;
+  background: #d7d7d7;
+  display: none;
+}
+.dropzonebox .preview .progress .upload,
+.dropzonebox-previews .preview .progress .upload {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  background-color: #8cc657;
+}
+.dropzonebox .preview.processing .progress,
+.dropzonebox-previews .preview.processing .progress {
+  display: block;
+}
+.dropzonebox .preview .error-message,
+.dropzonebox-previews .preview .error-message {
+  display: none;
+  position: absolute;
+  top: -5px;
+  left: -20px;
+  background: rgba(245,245,245,0.8);
+  padding: 8px 10px;
+  color: #800;
+  min-width: 140px;
+  max-width: 500px;
+  z-index: 500;
+}
+.dropzonebox .preview:hover.error .error-message,
+.dropzonebox-previews .preview:hover.error .error-message {
+  display: block;
+}
+
+.dropzonebox .default.message {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  -moz-transition: opacity 0.3s ease-in-out;
+  -o-transition: opacity 0.3s ease-in-out;
+  -ms-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+  background-image: url("../images/spritemap.png");
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  position: absolute;
+  width: 428px;
+  height: 123px;
+  margin-left: -214px;
+  margin-top: -61.5px;
+  top: 50%;
+  left: 50%;
+}
+@media all and (-webkit-min-device-pixel-ratio: 1.5) {
+  .dropzonebox .default.message {
+    background-image: url("../images/spritemap@2x.png");
+    -webkit-background-size: 428px 406px;
+    -moz-background-size: 428px 406px;
+    background-size: 428px 406px;
+  }
+}
+.dropzonebox .default.message span {
+  display: none;
+}
+.dropzonebox.square .default.message {
+  background-position: 0 -123px;
+  width: 268px;
+  margin-left: -134px;
+  height: 174px;
+  margin-top: -87px;
+}
+.dropzonebox.drag-hover .message {
+  opacity: 0.15;
+  filter: alpha(opacity=15);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=15)";
+}
+.dropzonebox.started .message {
+  display: block;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+}
+.dropzonebox .preview,
+.dropzonebox-previews .preview {
+  -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.16);
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.16);
+  font-size: 14px;
+}
+.dropzonebox .preview .details img,
+.dropzonebox-previews .preview .details img {
+  width: 100px;
+  height: 100px;
+}
+.dropzonebox .preview.image-preview:hover .details img,
+.dropzonebox-previews .preview.image-preview:hover .details img {
+  display: block;
+  opacity: 0.1;
+  filter: alpha(opacity=10);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+}
+.dropzonebox .preview.success .success-mark,
+.dropzonebox-previews .preview.success .success-mark {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+}
+.dropzonebox .preview.error .error-mark,
+.dropzonebox-previews .preview.error .error-mark {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+}
+.dropzonebox .preview.error .progress .upload,
+.dropzonebox-previews .preview.error .progress .upload {
+  background: #ee1e2d;
+}
+.dropzonebox .preview .error-mark,
+.dropzonebox-previews .preview .error-mark,
+.dropzonebox .preview .success-mark,
+.dropzonebox-previews .preview .success-mark {
+  display: block;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  -webkit-transition: opacity 0.4s ease-in-out;
+  -moz-transition: opacity 0.4s ease-in-out;
+  -o-transition: opacity 0.4s ease-in-out;
+  -ms-transition: opacity 0.4s ease-in-out;
+  transition: opacity 0.4s ease-in-out;
+  background-image: url("../images/spritemap.png");
+  background-repeat: no-repeat;
+}
+@media all and (-webkit-min-device-pixel-ratio: 1.5) {
+  .dropzonebox .preview .error-mark,
+  .dropzonebox-previews .preview .error-mark,
+  .dropzonebox .preview .success-mark,
+  .dropzonebox-previews .preview .success-mark {
+    background-image: url("../images/spritemap@2x.png");
+    -webkit-background-size: 428px 406px;
+    -moz-background-size: 428px 406px;
+    background-size: 428px 406px;
+  }
+}
+.dropzonebox .preview .error-mark span,
+.dropzonebox-previews .preview .error-mark span,
+.dropzonebox .preview .success-mark span,
+.dropzonebox-previews .preview .success-mark span {
+  display: none;
+}
+.dropzonebox .preview .error-mark,
+.dropzonebox-previews .preview .error-mark {
+  background-position: -268px -123px;
+}
+.dropzonebox .preview .success-mark,
+.dropzonebox-previews .preview .success-mark {
+  background-position: -268px -163px;
+}
+.dropzonebox .preview .progress .upload,
+.dropzonebox-previews .preview .progress .upload {
+  -webkit-animation: loading 0.4s linear infinite;
+  -moz-animation: loading 0.4s linear infinite;
+  -o-animation: loading 0.4s linear infinite;
+  -ms-animation: loading 0.4s linear infinite;
+  animation: loading 0.4s linear infinite;
+  -webkit-transition: width 0.3s ease-in-out;
+  -moz-transition: width 0.3s ease-in-out;
+  -o-transition: width 0.3s ease-in-out;
+  -ms-transition: width 0.3s ease-in-out;
+  transition: width 0.3s ease-in-out;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-image: url("../images/spritemap.png");
+  background-repeat: repeat-x;
+  background-position: 0px -400px;
+}
+@media all and (-webkit-min-device-pixel-ratio: 1.5) {
+  .dropzonebox .preview .progress .upload,
+  .dropzonebox-previews .preview .progress .upload {
+    background-image: url("../images/spritemap@2x.png");
+    -webkit-background-size: 428px 406px;
+    -moz-background-size: 428px 406px;
+    background-size: 428px 406px;
+  }
+}
+.dropzonebox .preview.success .progress,
+.dropzonebox-previews .preview.success .progress {
+  display: block;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  -webkit-transition: opacity 0.4s ease-in-out;
+  -moz-transition: opacity 0.4s ease-in-out;
+  -o-transition: opacity 0.4s ease-in-out;
+  -ms-transition: opacity 0.4s ease-in-out;
+  transition: opacity 0.4s ease-in-out;
+}
+.dropzonebox .preview .error-message,
+.dropzonebox-previews .preview .error-message {
+  display: block;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  -webkit-transition: opacity 0.3s ease-in-out;
+  -moz-transition: opacity 0.3s ease-in-out;
+  -o-transition: opacity 0.3s ease-in-out;
+  -ms-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+}
+.dropzonebox .preview:hover.error .error-message,
+.dropzonebox-previews .preview:hover.error .error-message {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+}
+@-moz-keyframes loading {
+  0% {
+    background-position: 0 -400px;
+  }
+
+  100% {
+    background-position: -7px -400px;
+  }
+}
+@-webkit-keyframes loading {
+  0% {
+    background-position: 0 -400px;
+  }
+
+  100% {
+    background-position: -7px -400px;
+  }
+}
+@-o-keyframes loading {
+  0% {
+    background-position: 0 -400px;
+  }
+
+  100% {
+    background-position: -7px -400px;
+  }
+}
+@-ms-keyframes loading {
+  0% {
+    background-position: 0 -400px;
+  }
+
+  100% {
+    background-position: -7px -400px;
+  }
+}
+@keyframes loading {
+  0% {
+    background-position: 0 -400px;
+  }
+
+  100% {
+    background-position: -7px -400px;
+  }
+}

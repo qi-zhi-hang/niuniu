@@ -1,0 +1,9 @@
+{volist name="addresslist" key="key" id="vo"}
+          <li address_id="{$vo.id}"> <a href="{:url('deleteaddress', array('id' => $vo['id']))}" class="pull-right text-danger deleteaddress" style="font-size:12px;">删除</a>
+            <p>收货人：{$vo.name}&nbsp;&nbsp;&nbsp;电话：{$vo.tel}</p>
+            <p>{:getRegionById($vo['region'])}{$vo.area}</p>
+            <span class="hidden">
+
+   
+            </span> </li>
+          {/volist}

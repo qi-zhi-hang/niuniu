@@ -1,0 +1,89 @@
+{include file="public/top"}
+<!--body wrapper start-->
+<div class="wrapper">
+<section class="panel">
+        <header class="panel-heading">
+            修改管理用户  
+      <span class="pull-right">
+     <a href="{:url('index')}" class="btn btn-success btn-sm">
+     <i class="fa fa-reply"></i> 返回用户列表</a>
+     </span>                                                       
+        </header>
+        <div class="panel-body">
+            <form action="{:url('update')}" class="form-horizontal" method="post">
+                <input type="hidden" name="id" value="{$info.id}"/>
+                <div class="form-group">
+                    <label class="control-label col-md-3">用户名</label>
+                    <div class="col-md-4 col-xs-11">
+                        <input class="form-control form-control-inline input-medium default-date-picker" size="16" type="text" value="{$info.account}" name="account">
+                        
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3">昵称</label>
+                    <div class="col-md-4 col-xs-11">
+                        <input class="form-control form-control-inline input-medium default-date-picker" size="16" type="text" value="{$info.nickname}" name="nickname">
+                       
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3">密码</label>
+                    <div class="col-md-4 col-xs-11">
+                        <input class="form-control form-control-inline input-medium default-date-picker" size="16" type="password" value="" name="password">
+                       
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3">邮箱</label>
+                    <div class="col-md-4 col-xs-11">
+                        <input class="form-control form-control-inline input-medium default-date-picker" size="16" type="text" value="{$info.email}" name="email">
+                       
+                    </div>
+                </div>
+                <div class="form-group icheck green">
+                    <label class="control-label col-md-3">是否是超级管理员</label>
+                    <div class="col-md-4 col-xs-11">
+                      <div class="radio list-inline">
+                                  <input tabindex="3" type="radio"  name="isadministrator" value="1" checked>
+                                  <label>是</label>&nbsp;&nbsp;
+                       </div>
+                      <div class="radio list-inline">
+                                  <input tabindex="3" type="radio"  name="isadministrator" value="0">
+                                  <label>否</label>
+                       </div>
+                    </div>
+                    </div>
+                     <div class="form-group icheck">
+                     
+                     <label class="control-label col-md-3">角色</label>
+                    <div class="col-md-4 col-xs-11">
+                     
+                       {volist name="rolelist" id="vo"}
+                         <div class="checkbox list-inline">
+
+                              <!-- {:dump($managelist)} -->
+                              <input tabindex="3" type="checkbox" 
+                              {if condition="in_array($vo['id'], $managelist)"}checked
+                                
+                              {/if} name="roleid[]" value="{$vo.id}">
+                               <label>{$vo.name}</label>
+                        </div>
+                       {/volist}
+                       </div>
+                     </div>
+
+                    <div class="form-group">
+
+                      <label class="control-label col-md-3"></label>
+                      <div class="col-md-4 col-xs-11">
+                          <button class="btn btn-success" type="submit"> 保存</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </section>
+</div>
+<!--body wrapper end-->
+{include file="public/bottom"}
+

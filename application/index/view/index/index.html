@@ -1,0 +1,136 @@
+{include file="public/top"}
+
+
+{notempty name="adlist"}
+<div class="banner-grid">
+	<div id="visual">
+			<div class="slide-visual">
+				<!-- Slide Image Area (1000 x 424) -->
+				<ul class="slide-group">
+                
+                {volist name="adlist" id="vo"}
+                
+					<li><a href="{$vo.link}"><img class="img-responsive" src="{$vo.img_url}" alt="{$vo.title}" /></a></li>
+
+					{/volist}
+				</ul>
+
+				<!-- Slide Description Image Area (316 x 328) -->
+				<div class="script-wrap">
+					
+					<div class="slide-controller">
+						<a href="#" class="btn-prev"><img src="__STATIC__/index/images/btn_prev.png" alt="Prev Slide" /></a>
+						
+						<a href="#" class="btn-next"><img src="__STATIC__/index/images/btn_next.png" alt="Next Slide" /></a>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	<script type="text/javascript" src="__STATIC__/index/js/pignose.layerslider.js"></script>
+	<script type="text/javascript">
+	//<![CDATA[
+		$(window).load(function() {
+			$('#visual').pignoseLayerSlider({
+				play    : '.btn-play',
+				pause   : '.btn-pause',
+				next    : '.btn-next',
+				prev    : '.btn-prev'
+			});
+		});
+	//]]>
+	</script>
+
+</div> 
+{/notempty}
+
+
+<div class="product-easy">
+	<div class="container">
+		
+		<script src="__STATIC__/index/js/easyResponsiveTabs.js" type="text/javascript"></script>
+		<script type="text/javascript">
+							$(document).ready(function () {
+								$('#horizontalTab').easyResponsiveTabs({
+									type: 'default', //Types: default, vertical, accordion           
+									width: 'auto', //auto or any width like 600px
+									fit: true   // 100% fit in a container
+								});
+							});
+							
+		</script>
+		<div class="sap_tabs">
+			<div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
+				<ul class="resp-tabs-list">
+                
+                
+                {volist name="catelist" id="vo"}
+					<li class="resp-tab-item" aria-controls="tab_item-{$key}" role="tab"><span>{$vo.title}</span></li> 
+					{/volist}
+                    
+				</ul>				  	 
+				<div class="resp-tabs-container">{volist name="catelist" id="vo"}
+					<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-{$key}">
+                    
+                    
+                    
+                    
+                         
+                    
+                    {volist name="vo['product']" id="pvo"}
+                    
+                    
+						<div class="col-md-3 product-men">
+      <div class="men-pro-item simpleCart_shelfItem">
+        <div class="men-thumb-item"> <img src="{$pvo.img_url}" alt="" class="pro-image-front"> <img src="{$pvo.img_url}" alt="" class="pro-image-back">
+          <div class="men-cart-pro">
+            <div class="inner-men-cart-pro"> <a href="{:url('product/index', array('id' => $pvo['id']))}" class="link-product-add-cart">查看详情</a> </div>
+          </div>
+        </div>
+        <div class="item-info-product ">
+          <h4><div style="padding:10px; text-align:left; line-height:1.5;"><a href="{:url('product/index', array('id' => $pvo['id']))}">{$pvo.title}</a></div></h4>
+          <div class="info-product-price"> <span class="item_price">¥{$pvo.price}</span> <del>¥{$pvo.originalCost}</del> </div>
+          
+          
+          <form class="addcartform" callback="s" id="addtocart{$pvo.id}" action="{:url('Carts/add')}">
+							<input type="hidden" name="product_num" id="num" value="1"/>
+							<input type="hidden" name="product_id" value="{$pvo.id}">
+                            </form>
+          
+          <a href="##" onClick="$('#addtocart{$pvo.id}').submit();" class="item_add single-item hvr-outline-out button2">加入购物车</a> </div>
+      </div>
+    </div>
+                        
+                          {/volist}
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						<div class="clearfix"></div>
+					</div>
+					{/volist}
+						
+				</div>	
+			</div>
+		</div>
+	</div>
+</div>
+<!-- //product-nav -->
+{include file="public/bottom"}
+

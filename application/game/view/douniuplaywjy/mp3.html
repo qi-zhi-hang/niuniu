@@ -1,0 +1,114 @@
+<audio onended="mp3playandpause('mp3niu0');" id="mp3niu0" src="__STATIC__/game/video/nv_niu0.mp3"></audio>
+<audio onended="mp3playandpause('mp3niu1');" id="mp3niu1" src="__STATIC__/game/video/nv_niu1.mp3"></audio>
+<audio onended="mp3playandpause('mp3niu2');" id="mp3niu2" src="__STATIC__/game/video/nv_niu2.mp3"></audio>
+<audio onended="mp3playandpause('mp3niu3');" id="mp3niu3" src="__STATIC__/game/video/nv_niu3.mp3"></audio>
+<audio onended="mp3playandpause('mp3niu4');" id="mp3niu4" src="__STATIC__/game/video/nv_niu4.mp3"></audio>
+<audio onended="mp3playandpause('mp3niu5');" id="mp3niu5" src="__STATIC__/game/video/nv_niu5.mp3"></audio>
+<audio onended="mp3playandpause('mp3niu6');" id="mp3niu6" src="__STATIC__/game/video/nv_niu6.mp3"></audio>
+<audio onended="mp3playandpause('mp3niu7');" id="mp3niu7" src="__STATIC__/game/video/nv_niu7.mp3"></audio>
+<audio onended="mp3playandpause('mp3niu8');" id="mp3niu8" src="__STATIC__/game/video/nv_niu8.mp3"></audio>
+<audio onended="mp3playandpause('mp3niu9');" id="mp3niu9" src="__STATIC__/game/video/nv_niu9.mp3"></audio>
+<audio onended="mp3playandpause('mp3niu10');" id="mp3niu10" src="__STATIC__/game/video/nv_niuniu.mp3"></audio>
+<audio onended="mp3playandpause('mp3niu11');" id="mp3niu11" src="__STATIC__/game/video/nv_wuhua.mp3"></audio>
+<audio onended="mp3playandpause('mp3niu12');" id="mp3niu12" src="__STATIC__/game/video/nv_zha.mp3"></audio>
+<audio onended="mp3playandpause('mp3niu13');" id="mp3niu13" src="__STATIC__/game/video/nv_wuxiao.mp3"></audio>
+
+<audio onended="mp3playandpause('mp3daojishi');" id="mp3daojishi" src="__STATIC__/game/video/daojishi.mp3"></audio>
+<audio onended="mp3playandpause('mp3gold');" id="mp3gold" src="__STATIC__/game/video/gold.mp3"></audio>
+<audio onended="mp3playandpause('mp3kaiju');" id="mp3kaiju" src="__STATIC__/game/video/kaiju.mp3"></audio>
+<audio onended="mp3playandpause('mp3xiazhu');" id="mp3xiazhu" src="__STATIC__/game/video/xiazhu.mp3"></audio>
+<audio onended="mp3playandpause('mp3fapai');" id="mp3fapai" src="__STATIC__/game/video/fapai.mp3"></audio>
+
+<audio onended="mp3playandpause('message1');" id="message1" src="__STATIC__/game/message/message1.m4a"></audio>
+<audio onended="mp3playandpause('message2');" id="message2" src="__STATIC__/game/message/message2.m4a"></audio>
+<audio onended="mp3playandpause('message3');" id="message3" src="__STATIC__/game/message/message3.m4a"></audio>
+<audio onended="mp3playandpause('message4');" id="message4" src="__STATIC__/game/message/message4.m4a"></audio>
+<audio onended="mp3playandpause('message5');" id="message5" src="__STATIC__/game/message/message5.m4a"></audio>
+<audio onended="mp3playandpause('message6');" id="message6" src="__STATIC__/game/message/message6.m4a"></audio>
+<audio onended="mp3playandpause('message7');" id="message7" src="__STATIC__/game/message/message7.m4a"></audio>
+<audio onended="mp3playandpause('message8');" id="message8" src="__STATIC__/game/message/message8.m4a"></audio>
+<audio onended="mp3playandpause('message9');" id="message9" src="__STATIC__/game/message/message9.m4a"></audio>
+<audio onended="mp3playandpause('message10');" id="message10" src="__STATIC__/game/message/message10.m4a"></audio>
+<audio onended="mp3playandpause('message11');" id="message11" src="__STATIC__/game/message/message11.m4a"></audio>
+<audio onended="mp3playandpause('message12');" id="message12" src="__STATIC__/game/message/message12.m4a"></audio>
+
+<audio id="background" autoplay="autoplay" loop="loop" src="__STATIC__/game/video/background.mp3" autoplay preload></audio>
+
+<script>
+    function mp3play(id){
+        document.getElementById(id).play();
+    }
+    function mp3pause(id){
+        document.getElementById(id).pause();
+    }
+
+    function mp3playandpause(id){
+        mp3play(id);
+        mp3pause(id);
+    }
+
+</script>
+<script>
+    function audioAutoPlay(id){
+        var audio = document.getElementById(id),
+                play = function(){
+                    audio.play();
+                };
+        document.addEventListener("WeixinJSBridgeReady", function () {
+            play();
+            mp3pause(id);
+        }, false);
+        document.addEventListener('YixinJSBridgeReady', function() {
+            play();
+            mp3pause(id);
+        }, false);
+    }
+
+    audioAutoPlay('mp3niu0');
+    audioAutoPlay('mp3niu1');
+    audioAutoPlay('mp3niu2');
+    audioAutoPlay('mp3niu3');
+    audioAutoPlay('mp3niu4');
+    audioAutoPlay('mp3niu5');
+    audioAutoPlay('mp3niu6');
+    audioAutoPlay('mp3niu7');
+    audioAutoPlay('mp3niu8');
+    audioAutoPlay('mp3niu9');
+    audioAutoPlay('mp3niu10');
+    audioAutoPlay('mp3niu11');
+    audioAutoPlay('mp3niu12');
+    audioAutoPlay('mp3niu13');
+    audioAutoPlay('background');
+
+    audioAutoPlay('mp3daojishi');
+    audioAutoPlay('mp3gold');
+    audioAutoPlay('mp3kaiju');
+    audioAutoPlay('mp3xiazhu');
+
+    audioAutoPlay('mp3fapai');
+
+
+
+    audioAutoPlay('message1');
+    audioAutoPlay('message2');
+    audioAutoPlay('message3');
+    audioAutoPlay('message4');
+    audioAutoPlay('message5');
+    audioAutoPlay('message6');
+    audioAutoPlay('message7');
+    audioAutoPlay('message8');
+    audioAutoPlay('message9');
+    audioAutoPlay('message10');
+    audioAutoPlay('message11');
+    audioAutoPlay('message12');
+
+
+
+setTimeout(function(){
+    mp3play('background');
+},2000)
+
+
+
+</script>
+

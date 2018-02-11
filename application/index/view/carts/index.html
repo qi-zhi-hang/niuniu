@@ -1,0 +1,287 @@
+{include file="public/top"}
+<style>
+    #addressboxform td{padding:5px;}
+	#addresslist li{list-style:none; padding:10px; color:#333; cursor:pointer; border-width:1px; margin:5px; border-color:#ccc; background:#f1f1f1; border-style:solid;}
+	#addresslist li.on{color:#000; border:2px solid #FDA30E;}
+	#addresslist{font-size:14px;}
+	#createorder{background:#F4F4F4;}
+	#createorder .btn{border-radius:0; padding:15px 20px;}
+	
+</style>
+<div class="checkout">
+  <div class="container"> 
+    
+    <!-- 列出所有地址 前提是购物车不是空的 -->
+    
+    <div class="panel panel-success" style="border-radius:0;">
+      <header class="panel-heading" style="padding-bottom:15px; border-radius:0;"> <strong style="padding-top:10px;">请选择地址</strong> <span class="pull-right"> <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#addressbox"><span>添加地址 </span></a> </span> </header>
+      <div class="panel-body"> {notempty name="list"}
+        <ul id="addresslist">
+          {volist name="addresslist" key="key" id="vo"}
+          <li address_id="{$vo.id}"> <a href="{:url('deleteaddress', array('id' => $vo['id']))}" class="pull-right text-danger deleteaddress" style="font-size:12px;">删除</a>
+            <p>收货人：{$vo.name}&nbsp;&nbsp;&nbsp;电话：{$vo.tel}</p>
+            <p>{:getRegionById($vo['region'])}{$vo.area}</p>
+            <span class="hidden">
+
+   
+            </span> </li>
+          {/volist}
+        </ul>
+        {/notempty} </div>
+    </div>
+    <div class="table-responsive checkout-right animated wow slideInUp" data-wow-delay=".5s">
+      <table class="timetable_sub">
+        <thead>
+          <tr>
+            <th width="100">移除</th>
+            <th width="250">商品</th>
+            <th width="200">数量</th>
+            <th>商品名称</th>
+            <th width="70">单价</th>
+          </tr>
+        </thead>
+        {volist name="list" id="vo"}
+        <tr class="rem{$vo.product_id}">
+          <td class="invert-closeb"><div class="rem">
+              <div class="close{$vo.product_id} del"> </div>
+            </div>
+            <script>
+							$(document).ready(function(c) {
+								$('.close{$vo.product_id}').on(
+								'click', function(c){
+								if(!confirm('您确定要删除么')){
+									return false;
+								}
+								$.get('{:url('Carts/delete')}' , {product_id:{$vo.product_id}},function(data){
+									if(data.code == 1){
+										getCart();
+										$('.rem{$vo.product_id}').fadeOut('slow', function(c){
+										$('.rem{$vo.product_id}').remove();
+									});
+									}else{
+										alert(data.msg);
+									}
+									
+								} , 'json');
+									
+									});	  
+								});
+						   </script></td>
+          <td class="invert-image"><a href="{:url('Product/index',array('id' => $vo['product_id']))}"><img src="{$vo.img_url}" alt=" " class="img-responsive" /></a></td>
+          <td class="invert"><form action="{:url('Carts/update')}" callback="aa" class="sun">
+              <input type="hidden" name="product_num" class="num" value="{$vo.product_num}"/>
+              <input type="hidden" name="product_id" value="{$vo.product_id}">
+              <div class="quantity">
+                <div class="quantity-select">
+                  <div class="entry value-minus">&nbsp;</div>
+                  <div class="entry value"><span product_id="{$vo.product_id}">{$vo.product_num}</span></div>
+                  <div class="entry value-plus active">&nbsp;</div>
+                </div>
+              </div>
+            </form></td>
+          <td class="invert">{$vo.product_name}</td>
+          <td class="invert">{$vo.product_price}元</td>
+        </tr>
+        {/volist}
+        
+        
+        
+        {if condition="count($list) eq 0"}
+        
+   
+        <tr>
+          <td colspan="5" align="right" style="">购物车是空的</td>
+        </tr>
+        {/if} 
+        <!--quantity--> 
+        <script>
+					$('.value-plus').on('click', function(){
+						var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)+1;
+						divUpd.text(newVal);
+						$(this).parents('.sun').find('.num').val(newVal);
+						$(this).parents('.sun').trigger('submit');
+						
+					});
+
+					$('.value-minus').on('click', function(){
+						var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)-1;
+						if(newVal>=1) divUpd.text(newVal);
+						$(this).parents('.sun').find('.num').val(newVal);
+						
+						$(this).parents('.sun').trigger('submit');
+					});
+					function getCart()
+					{
+						$.get('{:url('getCart')}' , {} ,function(data){
+							$('#pro_num').html(data.num);
+							$('#totalmoney').html(data.total);
+						} , 'json');
+					}
+					</script> 
+        <!--quantity-->
+      </table>
+      
+      
+      
+      
+       {if condition="count($list) gt 0"}
+         <table style="margin-top:12px;" class="timetable_sub">
+        <tr>
+          <td colspan="5" align="right" style="text-align:right; border:none; padding:0;"><form id="createorder" action="{:url('createorder')}" callback="jump">
+<span class="pull-left">&nbsp;&nbsp;&nbsp;总共<span id="pro_num">0</span>件，总计 <span style="font-size:24px;" class="text-danger" id="totalmoney">0</span> 元 </span> &nbsp;&nbsp;&nbsp;
+
+<input type="hidden" name="address_id" value="0" id="addresss_id">
+<button type="submit" class="btn btn-success">立即支付</button>
+</form></td>
+        </tr>
+        </table>
+       
+        {/if} 
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+<!-- //carts -->
+
+<div class="modal fade" id="addressbox" tabindex="-1" role="dialog" aria-labelledby="addressbox">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content modal-info">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body modal-spa">
+        <div class="login-grids">
+          <div class="login">
+            <div class="login-bottom" style="width:auto; float:none;">
+              <form class="form-horizontal" action="{:url('saveaddress')}" method="post" callback="saveaddress">
+                <div class="sign-up">
+                  <h4>姓名</h4>
+                  <input type="text" value="" placeholder="姓名" name="name">
+                </div>
+                <div class="sign-up">
+                  <h4>电话</h4>
+                  <input type="text" placeholder="电话" name="tel">
+                </div>
+                <div class="sign-up">
+                  <h4>邮编</h4>
+                  <input type="text" placeholder="邮编" name="code">
+                </div>
+                <div class="sign-up"> <span id="areabox" style="margin-bottom:10px; display:block;"></span> </div>
+                <div class="sign-up">
+                  <h4>街道</h4>
+                  <input type="text" value="" required="" name="area">
+                </div>
+                <div class="sign-up">
+                  <input type="submit" value="保存地址">
+                </div>
+              </form>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file="public/bottom"} 
+<script>
+	getCart();
+$('form[callback="aa"]').ajaxsubmit({success:function(){
+	getCart();
+}});
+
+$('form[callback="saveaddress"]').ajaxsubmit({success:function(ret){
+	$.get('{:url('getaddress')}', {}, function(data){
+		$('#addresslist').html(data.data);
+		//绑定删除事件
+		binddelete();
+		//关闭窗口
+		$('#addressbox').modal('hide');
+	}, 'json');
+}});
+
+	
+	$(document).ready(function(e) {
+        $.ajax({
+			url:"{:url('getRegion')}",
+			data:"",
+			type:"POST",
+			dataType:"html",
+			success: function(data){
+				$('#areabox').html(data);
+			}
+		}); 
+    });
+	function removnextAll(e){
+		if($(e).next().length>0){
+			removnextAll($(e).next());
+			$(e).next().remove();
+		}
+	}
+	function sendRegion(e){
+		if(e.value>0){
+			$.ajax({
+			url:"{:url('getRegion')}",
+			data:"fid="+e.value,
+			type:"POST",
+			dataType:"html",
+				success: function(data){
+					removnextAll(e);
+					$(e).parent().append(data);
+				}
+		    });
+	    }else{
+		    removnextAll(e);
+	    }
+	    return false;
+	}
+
+
+
+//绑定删除地址事件
+function binddelete(){
+	$('.deleteaddress').each(function(index, element) {
+		
+		$(this).parent().click(function(e) {
+            $(this).parent().find('li').removeClass('on');
+            $(this).addClass('on');
+        });
+		
+		
+		
+		
+		$(this).parent().click(function(e) {
+			$('#addresss_id').val($(this).attr('address_id'));
+        });
+		
+		$(this).click(function(e) {
+			//防止事件冒泡
+			e.stopPropagation();
+			if(!confirm('您确定要删除吗？')){
+				return false;
+			}
+			$.get($(this).attr('href'), {}, function(data){
+				if(data.code == 1){
+					$(element).parent().remove();
+				}else{
+					alert(data.info);
+				}
+			}, 'json');
+			return false;
+		});
+	});
+}
+binddelete();
+
+
+
+$('#createorder').ajaxsubmit({success:function(){
+	
+}});
+
+</script>
+</body></html>

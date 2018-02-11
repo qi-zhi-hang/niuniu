@@ -1,0 +1,44 @@
+{include file="public/top"}
+       <!--body wrapper start-->
+<div class="wrapper">
+ <section class="panel">
+    <header class="panel-heading">
+        角色授权 
+    <span class="pull-right">
+      <a href="{:url('index')}" class="btn btn-success btn-sm">
+      <i class="fa fa-reply"></i> 返回角色列表</a>
+    </span>                            
+    </header>
+    <div class="panel-body">
+         <form action="{:url('access')}" class="form-horizontal" method="post">
+            <input type="hidden" name="id" value="{$info.id}"/>
+				    <div class="form-group">
+
+						<div class="col-sm-12">
+			      {volist name="list" key="key" id="vo"}
+
+			      <?php 
+               $n = ($key == count($list)) ? $vo['pid'] : $list[$key]['pid'];
+               $p = ($key > 1) ? $list[$key - 2]['id'] : $vo['id'];
+               $deep = ($key > 1) ? $list[$key - 2]['deep'] : $vo['deep'];
+			         if(($n == $vo['id'] || $p == $vo['pid']) || $deep != $vo['deep']){?><br>{:getdeepstr($vo['deep'])}<?php  }?>
+					
+			         <label class="checkbox-inline"> <input <?php if(in_array($vo['id'], $nodelist)){?>checked<?php }?> type="checkbox" name="nodeid[]" value="{$vo.id}" />
+			          {$vo.title}</label>
+			           {/volist}
+	          </div>
+	          </div>
+				<div class="form-group">
+            <label class="control-label col-md-3"></label>
+            <div class="col-md-4 col-xs-11">
+                <button class="btn btn-success" type="submit"> 保存</button>
+            </div>
+        </div>
+                      
+      </form>
+    </div>
+  </section>
+</div>
+<!--body wrapper end-->
+{include file="public/bottom"}
+

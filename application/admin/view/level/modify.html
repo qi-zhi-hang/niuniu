@@ -1,0 +1,35 @@
+{include file="public/top"} 
+<!--body wrapper start-->
+<div class="wrapper">
+  <section class="panel">
+    <header class="panel-heading"> 修改会员等级 <span class="pull-right"> <a href="{:url('index')}" class="btn btn-success btn-sm"> <i class="fa fa-reply"></i> 返回会员等级列表</a> </span> </header>
+    <div class="panel-body">
+      <form action="{:url('update')}" class="form-horizontal" method="post">
+        <input type="hidden" name="id" value="{$info.id}">
+        <div class="form-group">
+                                    <label class="control-label col-md-3">等级名称</label>
+                                    <div class="col-md-4 col-xs-11">
+                                        <input class="form-control form-control-inline input-medium default-date-picker" size="16" type="text" value="{$info.levelname}" name="levelname">
+                                        
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">消费折扣率</label>
+                                    <div class="col-md-4 col-xs-11">
+                                        <input class="form-control form-control-inline input-medium default-date-picker" size="16" type="text" value="{$info.discount}" name="discount">
+                                       
+                                    </div>
+                                </div>
+                        
+                                 <div class="form-group">
+                                      <label class="control-label col-md-3"></label>
+                                      <div class="col-md-4 col-xs-11">
+                                          <button class="btn btn-success" type="submit"> 保存</button>
+                                    </div>
+                                </div>
+      </form>
+    </div>
+  </section>
+</div>
+<!--body wrapper end--> 
+{include file="public/bottom"} 

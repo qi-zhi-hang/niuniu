@@ -1,0 +1,41 @@
+  <!--footer section start-->
+        
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+<script src="__STATIC__/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="__STATIC__/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="__STATIC__/js/bootstrap.min.js"></script>
+<script src="__STATIC__/js/modernizr.min.js"></script>
+<script src="__STATIC__/js/jquery.nicescroll.js"></script>
+
+
+<!--icheck -->
+<script src="__STATIC__/js/iCheck/jquery.icheck.js"></script>
+<script src="__STATIC__/js/icheck-init.js"></script>
+
+<script src="__STATIC__/js/dropzone/dropzone.js"></script>
+<script type="text/javascript" charset="utf-8" src="__STATIC__/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__STATIC__/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="__STATIC__/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+<!--common scripts for all pages-->
+<script src="__STATIC__/js/scripts.js"></script>
+<script src="__STATIC__/js/setajax.js"></script>
+<script>
+$('#leftmenu .sub-menu-list a').each(function(index, element) {
+            if(window.location.href.indexOf($(this).attr('href')) >= 0){
+				$(this).parent('li').addClass('active');
+				$(this).parent('li').parent('ul').parent('li').addClass('nav-active');
+			}
+        });
+$('form').ajaxsubmit();
+</script>
+</body>
+</html>

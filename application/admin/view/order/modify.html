@@ -1,0 +1,96 @@
+{include file="public/top"} 
+<!--body wrapper start-->
+<div class="wrapper">
+  <div class="panel">
+    <header class="panel-heading"> 查看订单【{$info.ordernumber}】 <span class="pull-right"> <a href="{:url('index')}" class="btn btn-success btn-sm"> <i class="fa fa-reply"></i> 返回订单列表</a> </span> </header>
+    <div class="panel-body">
+    <div class="page-header">
+   <h4>订单信息</h4>
+</div>
+    
+    <p>
+    订单号：{$info.ordernumber}</p>
+    <p>总价：<span class="text-danger"><strong>¥{$info.total}</strong></span></p>
+   <p> 状态：【{eq name="$info['status']" value="0"}<span class="text-muted"><strong>已取消</strong></span>{/eq}
+                  {eq name="$info['status']" value="1"}<span class="text-danger"><strong>未付款</strong></span>{/eq}
+                  {eq name="$info['status']" value="2"}<span class="text-success"><strong>已付款</strong></span>{/eq}】
+                  
+                  
+                  【{eq name="$info['shipping_status']" value="0"}<span class="text-danger"><strong>未发货</strong></span>{/eq}
+                  {eq name="$info['shipping_status']" value="1"}<span class="text-info"><strong>部分发货</strong></span>{/eq}
+                  {eq name="$info['shipping_status']" value="2"}<span class="text-success"><strong>全部发货</strong></span>{/eq}
+                  {eq name="$info['shipping_status']" value="3"}<span class="text-info"><strong>部分确认</strong></span>{/eq}
+                  {eq name="$info['shipping_status']" value="4"}<span class="text-success"><strong>全部确认</strong></span>{/eq}】
+                  
+
+                  【{eq name="$info['service_status']" value="0"}<span class="text-danger"><strong>无售后</strong></span>{/eq}
+                  {eq name="$info['service_status']" value="1"}<span class="text-info"><strong>部分退货</strong></span>{/eq}
+                  {eq name="$info['service_status']" value="2"}<span class="text-success"><strong>换货</strong></span>{/eq}
+                  {eq name="$info['service_status']" value="3"}<span class="text-info"><strong>全部退货</strong></span>{/eq}
+                  】</p>
+{eq name="$info['status']" value="2"}<p>付款时间：<span class="text-success"><strong>{:date('Y-m-d H:i:s', $info['paytime'])}</strong></span></p>{/eq}
+    
+    <div class="page-header">
+   <h4>收货人信息</h4>
+</div>
+    <p>{notempty name="vo['receivename']"}<p>收货人姓名：{$vo.receivename}</p>{/notempty}</p>
+                  <p>{notempty name="vo['receivename']"}<p>收货人地址：{$vo.address}</p>{/notempty}</p>
+                  <p>{notempty name="vo['receivename']"}<p>收货人电话：{$vo.tel}</p>{/notempty}</p>
+    
+    
+    
+    
+    
+    <div class="page-header">
+   <h4>全部商品</h4>
+</div>
+    
+      <table class="table table-hover table-bordered">
+        <tbody>
+        <thead>
+        <th>订单号</th> 
+          <th>图片</th>
+          <th>名称</th>
+          <th>单价</th>
+          <th>数量</th>
+          <th>小计</th>
+          
+          <th>状态</th>
+          
+            </thead>
+          {volist name="list" id="vo"}
+        <tr>
+          <td>{$vo.order_num}</td>
+          <td><a target="_blank" href="{:url('product/modify', array('id' => $vo['product_id']))}"><img src="{$vo.img_url}" width="80" height="80" ></a></td>
+          <td>{$vo.title}</td>
+          <td>{$vo.order_num}</td>
+          <td>{$vo.price}</td>
+          <td>{$vo.num}</td>
+          <td>
+          
+          【{eq name="$vo['status1']" value="1"}<span class="text-success"><strong>有效</strong></span>{/eq}
+            {eq name="$vo['status1']" value="0"}<span class="text-danger"><strong>无效</strong></span>{/eq}】
+          
+
+          【{eq name="$vo['status2']" value="1"}<span class="text-success"><strong>已付款</strong></span>{/eq}
+            {eq name="$vo['status2']" value="0"}<span class="text-muted"><strong>未付款</strong></span>{/eq}
+            {eq name="$vo['status2']" value="-1"}<span class="text-danger"><strong>已退款</strong></span>{/eq}】
+                  
+                  【{eq name="$vo['status3']" value="0"}<span class="text-success"><strong>未发货</strong></span>{/eq}
+                  {eq name="$vo['status3']" value="1"}<span class="text-muted"><strong>已发货</strong></span>{/eq}
+                  {eq name="$vo['status3']" value="2"}<span class="text-danger"><strong>已收货</strong></span>{/eq}
+                  】
+          【{eq name="$vo['status4']" value="0"}<span class="text-success"><strong>无售后</strong></span>{/eq}
+                  {eq name="$vo['status4']" value="1"}<span class="text-muted"><strong>退货</strong></span>{/eq}
+                  {eq name="$vo['status4']" value="2"}<span class="text-danger"><strong>换货</strong></span>{/eq}
+                  】
+          </td>
+          
+          {/volist}
+            </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!--body wrapper end--> 
+{include file="public/bottom"} 

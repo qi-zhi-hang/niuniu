@@ -1,0 +1,44 @@
+{include file="public/top"}
+       <!--body wrapper start-->
+        <div class="wrapper">
+          <div class="panel">
+          
+          <header class="panel-heading">
+              用户管理：
+             <span class="pull-right">
+             <a href="{:url('add')}" class="btn btn-success btn-sm"><i class="fa fa-plus" ></i> 增加用户</a>
+             </span>
+
+         </header>
+            <div class="panel-body">
+
+              <table class="table table-hover table-bordered">
+                <tbody>
+                 <thead>
+                   <th>ID</th>
+                  <th>登录名</th>
+                  <th>昵称</th>
+                  <th>最后登录时间</th>
+                  <th style="text-align:center">操作</th>
+                </thead>
+                {volist name="list" id="vo"} 
+                <tr>
+                  <td>{$vo.id}</td>
+                  <td>{$vo.account}</td>
+                  <td>{$vo.nickname}</td>
+                  <td>{:date('Y-m-d H:i')}</td>
+                  <td style="text-align:center"><a href="{:url('delete', array('id' => $vo['id']))}" class="btn btn-danger btn-sm">删除</a> &nbsp;<a href="{:url('modify', array('id' => $vo['id']))}" class="btn btn-success btn-sm">修改</a></td>
+                </tr>
+               {/volist}
+              <tr>
+                <td colspan="5" align="center">{$pages}</td>
+              </tr>
+          </tbody>
+
+      </table>
+    </div>
+  </div>
+</div>
+        <!--body wrapper end-->
+{include file="public/bottom"}
+

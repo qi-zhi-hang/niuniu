@@ -1,0 +1,52 @@
+{include file="public/top"}
+       <!--body wrapper start-->
+        <div class="wrapper">
+          <div class="panel">
+          
+          <header class="panel-heading">
+              商品管理
+             <span class="pull-right">
+             <a href="{:url('add')}" class="btn btn-success btn-sm"><i class="fa fa-plus" ></i> 增加商品</a>
+             </span>
+
+         </header>
+            <div class="panel-body">
+
+              <table class="table table-hover table-bordered">
+                <tbody>
+                 <thead>
+                   <th>ID</th>
+                  <th width="220">商品名</th>
+                  <th width="120">主图</th>
+                  <th>分类</th>
+                  <th>单价</th>
+                  <th>状态</th>
+                  <th>销量</th>
+                  <th>库存</th>
+                  <th style="text-align:center">操作</th>
+                </thead>
+                {volist name="list" id="vo"} 
+                <tr>
+                  <td>{$vo.id}</td>
+                  <td>{$vo.title}</td>
+                  <td><img src="{$vo.img_url}" width="50" height="50"></td>
+                  <td>{$vo.category_name}</td>
+                  <td>{$vo.price}</td>
+                  <td>{$vo.status}</td>
+                  <td>{$vo.salecount}</td>
+                  <td>{$vo.stocks}</td>
+                  <td style="text-align:center; width:120px;"><a onClick="return confirm('您确定要删除吗？');" href="{:url('delete', array('id' => $vo['id']))}" class="btn btn-danger btn-sm">删除</a> <a href="{:url('modify', array('id' => $vo['id']))}" class="btn btn-success btn-sm">修改</a></td>
+                </tr>
+               {/volist}
+              <tr>
+                <td colspan="9" align="center">{$pages}</td>
+              </tr>
+          </tbody>
+
+      </table>
+    </div>
+  </div>
+</div>
+        <!--body wrapper end-->
+{include file="public/bottom"}
+

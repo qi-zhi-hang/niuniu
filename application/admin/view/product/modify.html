@@ -1,0 +1,163 @@
+{include file="public/top"}
+       <!--body wrapper start-->
+  <div class="wrapper">
+   <section class="panel">
+      <header class="panel-heading">
+          修改商品信息
+        <span class="pull-right">
+           <a href="{:url('index')}" class="btn btn-success btn-sm">
+           <i class="fa fa-reply"></i> 返回商品列表</a>
+        </span>                            
+      </header>
+                  <div class="panel-body">
+                      <form action="{:url('update')}" class="form-horizontal" method="post">
+<input type="hidden" name="id" value="{$info.id}">
+                          <div class="form-group">
+                              <label class="control-label col-md-3">商品名称</label>
+                              <div class="col-md-4 col-xs-11">
+                                  <input class="form-control form-control-inline input-medium default-date-picker" size="16" type="text" value="{$info.title}" name="title">
+                                  
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="control-label col-md-3">商品图片</label>
+                              <div class="col-md-4 col-xs-11">
+                                 {TagLibping:upload name="img_url" id="img_url" value="$info['img_url']"}
+                              </div>
+                          </div>
+                          
+                          
+                          <div class="form-group">
+                              <label class="control-label col-md-3">图组</label>
+                              <div class="col-md-6 col-xs-11">
+                                 {TagLibping:upload name="mimg_url[]" id="mimg_url" value="$info['mimg_url']"}
+                              </div>
+                          </div>
+                          
+                          
+                          <div class="form-group">
+                              <label class="control-label col-md-3">商品详细介绍</label>
+                              <div class="col-md-6 col-xs-11">
+                                  {TagLibping:ueditor name="content" id="content" value="$info['content']"}
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="control-label col-md-3">单价</label>
+                              <div class="col-md-4 col-xs-11">
+                                  <input class="form-control form-control-inline input-medium default-date-picker" size="16" type="text" value="{$info.price}" name="price">
+                                  
+                              </div>
+                          </div> <div class="form-group">
+                              <label class="control-label col-md-3">原价</label>
+                              <div class="col-md-4 col-xs-11">
+                                  <input class="form-control form-control-inline input-medium default-date-picker" size="16" type="text" value="{$info.originalCost}" name="originalCost">
+                                  
+                              </div>
+                          </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">商品类别</label>
+                                 <div class="col-md-4 col-xs-11">
+                                    
+                                  <select name="category_id" class="form-control">                      
+                                    <option value="0">选择商品分类</option>  
+                                    
+                                    
+                                    
+                                    
+                                    {volist name="parentlist" id="vo"}
+                                        
+                                           <option {eq name="vo['id']" value="$info['category_id']"}selected{/eq} value="{$vo.id}">{$vo.title}</option>
+                                            {volist name="vo['sub']" id="svo"}
+                                                <option {eq name="svo['id']" value="$info['category_id']"}selected{/eq} value="{$svo.id}">{:getdeepstr($svo['deep'])}{$svo.title}</option>
+                                            {/volist}
+                                            
+                                        {/volist}
+                                    </select>
+                                    </div>
+                                </div>
+                           <div class="form-group">
+                              <label class="control-label col-md-3">库存量</label>
+                              <div class="col-md-4 col-xs-11">
+                                  <input class="form-control form-control-inline input-medium default-date-picker" size="16" type="text" value="100" name="stocks">
+                                  
+                              </div>
+                          </div>
+                          <div class="form-group icheck green">               
+                             <label class="control-label col-md-3">是否显示</label>
+                              <div class="col-md-4 col-xs-11">
+                                <div class="radio list-inline">    
+                                    <label><input tabindex="3" type="radio"  name="status" value="1" {eq name="vo['status']" value="1"}checked{/eq}>是</label>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                 </div>
+                                 
+                                 
+                                 <div class="radio list-inline">    
+                                    <label><input tabindex="3" type="radio"  name="status" value="0"  {eq name="vo['status']" value="0"}checked{/eq}>否</label>
+                                 </div>
+                                 
+                                 
+                              </div>
+                            </div>
+                            
+                             <div class="form-group icheck green">               
+                             <label class="control-label col-md-3">是否置顶</label>
+                             <div class="col-md-4 col-xs-11">
+                                <div class="radio list-inline">    
+                                    <label><input tabindex="3" type="radio"  name="is_top" value="1"  {eq name="info['is_top']" value="1"}checked{/eq}>是</label>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                 </div>
+                                 
+                                 
+                                 <div class="radio list-inline">    
+                                    <label><input tabindex="3" type="radio"  name="is_top" value="0" {eq name="info['is_top']" value="0"}checked{/eq}>否</label>
+                                 </div>
+                                 
+                                 
+                              </div>
+                             </div>
+                             <div class="form-group icheck green">               
+                             <label class="control-label col-md-3">是否推荐</label>
+                              <div class="col-md-4 col-xs-11">
+                                <div class="radio list-inline">    
+                                    <label><input tabindex="3" type="radio"  name="is_rec" value="1" {eq name="info['is_rec']" value="1"}checked{/eq}>是</label>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                 </div>
+                                 
+                                 
+                                 <div class="radio list-inline">    
+                                    <label><input tabindex="3" type="radio"  name="is_rec" value="0" {eq name="info['is_top']" value="0"}checked{/eq}>否</label>
+                                 </div>
+                                 
+                                 
+                              </div>
+                             </div>
+                             <div class="form-group icheck green">               
+                             <label class="control-label col-md-3">是否热门</label>
+                              <div class="col-md-4 col-xs-11">
+                                <div class="radio list-inline">    
+                                    <label><input tabindex="3" type="radio"  name="is_hot" value="1" {eq name="info['is_hot']" value="1"}checked{/eq}>是</label>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                 </div>
+                                 
+                                 
+                                 <div class="radio list-inline">    
+                                    <label><input tabindex="3" type="radio"  name="is_hot" value="0" {eq name="info['is_hot']" value="0"}checked{/eq}>否</label>
+                                 </div>
+                                 
+                                 
+                              </div>
+                             </div>
+                              <div class="form-group">
+                                <label class="control-label col-md-3"></label>
+                                <div class="col-md-4 col-xs-11">
+                                    <button class="btn btn-success" type="submit"> 保存</button>
+                              </div>
+                          </div>
+
+                      </form>
+                  </div>
+              </section>
+    </div>
+  <!--body wrapper end-->
+{include file="public/bottom"}
+

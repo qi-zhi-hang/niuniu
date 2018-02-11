@@ -1,0 +1,89 @@
+{include file="public/top"}
+       <!--body wrapper start-->
+        <div class="wrapper">
+         <section class="panel">
+                        <header class="panel-heading">
+                            增加导航项
+                        <span class="pull-right">
+             <a href="{:url('index')}" class="btn btn-success btn-sm">
+             <i class="fa fa-reply"></i> 返回导航管理列表</a>
+             </span>                            
+                        </header>
+                        <div class="panel-body">
+                            <form action="{:url('insert')}" class="form-horizontal" method="post">
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">名称</label>
+                                    <div class="col-md-4 col-xs-11">
+                                        <input class="form-control form-control-inline input-medium default-date-picker" size="16" type="text" value="" name="name">
+                                        
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">链接</label>
+                                    <div class="col-md-4 col-xs-11">
+                                        <input class="form-control form-control-inline input-medium default-date-picker" size="16" type="text" value="" name="link">
+                                       
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">排序</label>
+                                    <div class="col-md-4 col-xs-11">
+                                        <input class="form-control form-control-inline input-medium default-date-picker" size="16" type="text" value="100" name="sort">
+                                       
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">父级</label>
+                                    <div class="col-md-4 col-xs-11">
+                                    
+                                    <select name="pid" class="form-control">
+                                    
+                                    <option value="0">选择父级导航</option>
+                                        {volist name="parentlist" id="vo"}
+                                        
+                                           <option {eq name="vo['id']" value="$pid"}selected{/eq} value="{$vo.id}">{$vo.name}</option>
+                                            {volist name="vo['sub']" id="svo"}
+                                                <option {eq name="svo['id']" value="$pid"}selected{/eq} value="{$svo.id}">{:getdeepstr($svo['deep'])}{$svo.name}</option>
+                                            {/volist}
+                                            
+                                        {/volist}
+                                    </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group icheck green">
+                                
+                                
+                                
+                                
+                                    <label class="control-label col-md-3">打开方式</label>
+                                    <div class="col-md-4 col-xs-11">
+                                      <div class="radio list-inline">
+                                                  
+                                                  <label><input tabindex="3" type="radio"  name="target" value="_blank" checked>新窗口</label>&nbsp;&nbsp;
+                                       </div>
+                                      <div class="radio list-inline">
+                                                  
+                                                  <label><input tabindex="3" type="radio"  name="target" value="">当前窗口</label>&nbsp;&nbsp;
+                                       </div>
+                                       
+                                      
+                                       
+                                    </div>
+                                    </div>
+                                 <div class="form-group">
+                                      <label class="control-label col-md-3"></label>
+                                      <div class="col-md-4 col-xs-11">
+                                          <button class="btn btn-success" type="submit"> 保存</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </section>
+          </div>
+        <!--body wrapper end-->
+{include file="public/bottom"}
+

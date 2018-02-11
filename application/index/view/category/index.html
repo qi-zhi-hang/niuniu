@@ -1,0 +1,37 @@
+{include file="public/top"}
+<div style="padding:20px 0"><div class="container">
+  <div class="single-pro"> 
+  {notempty name="list"}
+  
+  {volist name="list" id="vo"}
+    <div class="col-md-3 product-men">
+      <div class="men-pro-item simpleCart_shelfItem">
+        <div class="men-thumb-item"> <img src="{$vo.img_url}" alt="" class="pro-image-front"> <img src="{$vo.img_url}" alt="" class="pro-image-back">
+          <div class="men-cart-pro">
+            <div class="inner-men-cart-pro"> <a href="{:url('product/index', array('id' => $vo['id']))}" class="link-product-add-cart">查看详情</a> </div>
+          </div>
+        </div>
+        <div class="item-info-product ">
+          <h4><div style="padding:10px; text-align:left; line-height:1.5;"><a href="{:url('product/index', array('id' => $vo['id']))}">{$vo.title}</a></div></h4>
+          <div class="info-product-price"> <span class="item_price">¥{$vo.price}</span> <del>¥{$vo.originalCost}</del> </div>
+          
+          
+          <form callback="s" class="addcartform" id="addtocart{$vo.id}" action="{:url('Carts/add')}">
+							<input type="hidden" name="product_num" id="num" value="1"/>
+							<input type="hidden" name="product_id" value="{$vo.id}">
+                            </form>
+          
+          <a href="##" onClick="$('#addtocart{$vo.id}').submit();" class="item_add single-item hvr-outline-out button2">加入购物车</a> </div>
+      </div>
+    </div>
+    {/volist}
+    
+    {else/}
+    <div style="border:1px dashed #ccc; text-align:center; padding:100px;">暂无商品信息</div>
+    {/notempty}
+    <div class="clearfix"></div>
+  </div>
+  <div class="pagination-grid text-right"> {$pages} </div>
+</div></div>
+{include file="public/bottom"} 
+

@@ -1,0 +1,49 @@
+{include file="public/top"}
+       <!--body wrapper start-->
+    <div class="wrapper">
+      <div class="panel">
+      
+      <header class="panel-heading">
+          全部红包
+
+     </header>
+        <div class="panel-body">
+        <table class="table table-hover table-bordered">
+        <tbody>
+          <thead>
+            <th>ID</th>
+            <th>创建id</th>
+            <th>创建人昵称</th>
+            <th>创建时间</th>
+            <th>领取id</th>
+            <th>领取时间</th>
+            <th>房卡数量</th>
+            <th>领取状态</th>
+          </thead>
+          {volist name="list" id="vo"}
+          <tr>
+            <td>{$vo.id}</td>
+            <td>{$vo.create_id}</td>
+            <td>{:getnickname($vo['create_id'])}</td>
+            <td>{:date('Y-m-d H:i:s',$vo['create_time'])}</td>
+            <td>{$vo.receive_id}</td>
+            <td>{:date('Y-m-d H:i:s',$vo['receive_time'])}</td>
+              <td>{$vo.cards_num}</td>
+              <td>{eq name="vo['status']" value="0"}未领取{/eq}
+                  {eq name="vo['status']" value="1"}领取{/eq}
+                  {eq name="vo['status']" value="-1"}退回{/eq}
+
+              </td>
+            <!--<td><a onClick="return confirm('您确定要删除吗？');" href="{:url('delete', array('id' => $vo['id']))}" class="btn btn-danger btn-sm">删除</a> <a href="{:url('modify', array('id' => $vo['id']))}" class="btn btn-success btn-sm">修改</a></td>-->
+          </tr>
+          {/volist}
+          <tr>
+            <td colspan="5" align="center">{$pages}</td>
+          </tr>
+        </tbody>
+      </table>
+     </div>
+    </div>
+</div>
+        <!--body wrapper end-->
+{include file="public/bottom"}

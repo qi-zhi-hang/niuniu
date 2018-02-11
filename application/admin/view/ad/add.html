@@ -1,0 +1,58 @@
+{include file="public/top"}
+       <!--body wrapper start-->
+  <div class="wrapper">
+   <section class="panel">
+  <header class="panel-heading">
+      发布文章
+  <span class="pull-right">
+  <a href="{:url('index')}" class="btn btn-success btn-sm">
+  <i class="fa fa-reply"></i> 返回广告列表</a>
+  </span>                            
+  </header>
+<div class="panel-body">
+  <form action="{:url('insert')}" class="form-horizontal" method="post">
+     
+    <div class="form-group">
+        <label class="control-label col-md-3">标题</label>
+        <div class="col-md-4 col-xs-11">
+            <input class="form-control form-control-inline input-medium default-date-picker" size="16" type="text" value="" name="title">
+        </div>
+    </div><div class="form-group">
+        <label class="control-label col-md-3">链接</label>
+        <div class="col-md-4 col-xs-11">
+            <input class="form-control form-control-inline input-medium default-date-picker" size="16" type="text" value="" name="link">
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label class="control-label col-md-3">图片</label>
+        <div class="col-md-6 col-xs-11">
+            {TagLibping:upload name="img_url" id="img_url" value=""}
+        </div>
+    </div>
+    
+      <div class="form-group icheck green">
+          <label class="control-label col-md-3">状态</label>
+          <div class="col-md-4 col-xs-11">
+            <div class="radio list-inline">
+                  <label><input tabindex="3" type="radio"  name="status" value="1" checked>是</label>&nbsp;&nbsp;
+             </div>
+            <div class="radio list-inline">
+                  <label><input tabindex="3" type="radio"  name="status" value="0">否</label>&nbsp;&nbsp;
+             </div>
+          </div>
+        </div>
+
+       <div class="form-group">
+            <label class="control-label col-md-3"></label>
+            <div class="col-md-4 col-xs-11">
+                <button class="btn btn-success" type="submit"> 保存</button>
+          </div>
+      </div>
+  </form>
+</div>
+</section>
+</div>
+<!--body wrapper end-->
+{include file="public/bottom"}
+

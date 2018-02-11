@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="On explicit save action" serverName="新加坡">
+    <serverData>
+      <paths name="新加坡">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/niuniu.pabupa.wang" local="$PROJECT_DIR$" web="/www/wwwroot/niuniu.pabupa.wang" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ON_EXPLICIT_SAVE" />
+  </component>
+</project>

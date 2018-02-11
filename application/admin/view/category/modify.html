@@ -1,0 +1,86 @@
+{include file="public/top"}
+       <!--body wrapper start-->
+        <div class="wrapper">
+         <section class="panel">
+                        <header class="panel-heading">
+                            修改商品分类 
+                        <span class="pull-right">
+             <a href="{:url('index')}" class="btn btn-success btn-sm">
+             <i class="fa fa-reply"></i> 返回分类列表</a>
+             </span>                            
+                        </header>
+                        <div class="panel-body">
+                            <form action="{:url('update')}" class="form-horizontal" method="post">
+<input type="hidden" name="id" value="{$info.id}">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">分类名称</label>
+                                    <div class="col-md-4 col-xs-11">
+                                        <input class="form-control form-control-inline input-medium default-date-picker" size="16" type="text" value="{$info.title}" name="title">
+                                        
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">分类简介</label>
+                                    <div class="col-md-4 col-xs-11">
+                                        <input class="form-control form-control-inline input-medium default-date-picker" size="16" type="text" value="{$info.content}" name="content">
+                                       
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">父级</label>
+                                    <div class="col-md-4 col-xs-11">
+                                    
+                                    <select name="pid" class="form-control">
+                                    
+                                    <option value="0">选择父节点</option>
+                                        {volist name="parentlist" id="vo"}
+                                        
+                                           <option {eq name="vo['id']" value="$info['pid']"}selected{/eq} value="{$vo.id}">{$vo.title}</option>
+                                            {volist name="vo['sub']" id="svo"}
+                                                <option {eq name="svo['id']" value="$info['pid']"}selected{/eq} value="{$svo.id}">{:getdeepstr($svo['deep'])}{$svo.title}</option>
+                                            {/volist}
+                                            
+                                        {/volist}
+                                    </select>
+                                    
+                                    
+                                    
+                                        
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group icheck green">
+                                
+                                
+                                
+                                
+                                    <label class="control-label col-md-3">状态</label>
+                                    <div class="col-md-4 col-xs-11">
+                                      <div class="radio list-inline">
+                                                  
+                                                  <label><input tabindex="3" {eq name="info['status']" value="1"}checked{/eq} type="radio"  name="status" value="1">显示</label>&nbsp;&nbsp;
+                                       </div>
+                                      <div class="radio list-inline">
+                                                  
+                                                  <label><input tabindex="3" {eq name="info['status']" value="0"}checked{/eq} type="radio"  name="status" value="0">隐藏</label>&nbsp;&nbsp;
+                                       </div>
+                                       
+                                      
+                                       
+                                       
+                                    </div>
+                                    </div>
+                                 <div class="form-group">
+                                      <label class="control-label col-md-3"></label>
+                                      <div class="col-md-4 col-xs-11">
+                                          <button class="btn btn-success" type="submit"> 保存</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </section>
+          </div>
+        <!--body wrapper end-->
+{include file="public/bottom"}
+

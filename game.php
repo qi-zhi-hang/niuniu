@@ -1,0 +1,15 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: wujunyuan
+ * Date: 2017/7/3
+ * Time: 13:17
+ */
+
+// [ 应用入口文件 ]
+
+// 定义应用目录
+define('APP_PATH', __DIR__ . '/application/');
+// 加载框架引导文件
+define('BIND_MODULE','game');
+require __DIR__ . '/thinkphp/start.php';
